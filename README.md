@@ -19,7 +19,6 @@ Each algorithm has its own characteristics and trade-offs, and this project aims
 To get started with this project, follow these steps:
 
 - Clone the repository:
-- 
 ```bash
 git clone https://github.com/AlirezaEbrahimkhani/Compare-Cache-Eviction-Algorithms.git
 ```
