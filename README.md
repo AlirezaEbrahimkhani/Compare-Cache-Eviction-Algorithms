@@ -40,7 +40,8 @@ This project is licensed under the MIT License. Feel free to use, modify, and di
 
 If you have any questions, suggestions, or feedback, please feel free to contact the project maintainer:
 
-- Alireza Ebrahimkhani
-- alirezaebrahimkhanidev@gmail.com
+- Alireza Ebrahimkhani - [Email](alirezaebrahimkhanidev@gmail.com)
+- Nima Meghdadi - [Email](meghdadi.nima@gmail.com)
+- Hamidreza Karami - [Email](hamidrezakarami16@gmail.com)
 
 We hope this repository helps you gain a better understanding of cache eviction algorithms and their impact on system performance. Happy caching!
