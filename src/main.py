@@ -1,1 +1,0 @@
-print("Dockerfile setup")
