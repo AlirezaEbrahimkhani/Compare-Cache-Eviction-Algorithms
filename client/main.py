@@ -1,4 +1,5 @@
 import json
+import requests
   
 # Opening JSON file
 f = open('tweets.json')
@@ -8,7 +9,9 @@ f = open('tweets.json')
 data = json.load(f)
   
 for i in range(0, 100):
-    print(data[i])
+    pload = data[i]
+    r = requests.post('http://localhost:8000/tweet/', json=pload)
+    print(r.text)
   
 # Closing file 
 f.close()
