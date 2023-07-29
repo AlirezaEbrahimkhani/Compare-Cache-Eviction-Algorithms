@@ -1,3 +1,4 @@
+import redis
 from fastapi import FastAPI
 from utils.redis import Redis
 from algorithms.lfu import LFUAlgorithm
