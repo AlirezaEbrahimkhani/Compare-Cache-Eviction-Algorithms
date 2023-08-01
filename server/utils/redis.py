@@ -31,3 +31,7 @@ class Redis:
     
     def clearDB(self):
         Redis.__instance.flushdb()
+    
+    def remove(self, key):
+        Redis.__instance.delete(key)
+

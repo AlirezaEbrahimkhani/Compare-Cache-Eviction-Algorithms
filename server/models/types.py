@@ -14,3 +14,7 @@ class TweetLike(BaseModel):
 class Response(Generic[T]):
     data: T
     hit: bool
+
+class LruTweet(Generic[T]):
+    data: T
+    timestamp: str
