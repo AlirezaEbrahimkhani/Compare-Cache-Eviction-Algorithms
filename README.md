@@ -9,7 +9,6 @@ Currently, the following cache eviction algorithms have been implemented in this
 
 - LRU (Least Recently Used)
 - LFU (Least Frequently Used)
-- LRU-2
 - ARC (Adaptive replacement cache)
 
 Each algorithm has its own characteristics and trade-offs, and this project aims to provide a comprehensive comparison of their performance metrics, such as hit rate, miss rate, and cache efficiency.
