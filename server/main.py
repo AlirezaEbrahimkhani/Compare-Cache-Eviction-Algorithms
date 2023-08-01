@@ -2,10 +2,12 @@ import redis
 from fastapi import FastAPI
 from utils.redis import Redis
 from algorithms.lfu import LFUAlgorithm
+from algorithms.lru import LRUAlgorithm
 
 app = FastAPI()
 redis = Redis()
 lfu = LFUAlgorithm(11)
+lru = LRUAlgorithm(3)
 
 @app.get("/")
 def defaultEndpoint():
@@ -13,6 +15,5 @@ def defaultEndpoint():
 
 @app.get("/tweet")
 def getTest(id: int):
-    tweet = lfu.get(id)
-    print(redis.getKeys())
+    tweet = lru.get(id)
     return tweet
