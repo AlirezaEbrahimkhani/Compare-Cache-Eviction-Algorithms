@@ -1,4 +1,0 @@
-- encapsulate repo with virtual env (ASAP)
-- separate Dockerfile for each client and server
-- implement LFU algorithm and a base for measurement
-- ...
