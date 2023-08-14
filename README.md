@@ -11,6 +11,8 @@ Currently, the following cache eviction algorithms have been implemented in this
 - LFU (Least Frequently Used)
 - ARC (Adaptive replacement cache)
 
+// TODO: Algorithms explanation
+
 Each algorithm has its own characteristics and trade-offs, and this project aims to provide a comprehensive comparison of their performance metrics, such as hit rate, miss rate, and cache efficiency.
 
 ## Getting Started
@@ -22,7 +24,7 @@ To get started with this project, follow these steps:
 git clone https://github.com/AlirezaEbrahimkhani/Compare-Cache-Eviction-Algorithms.git
 ```
 
-- Install the necessary dependencies. TODO://Provide instructions here for dependencies.
+- Install the necessary dependencies. `pip3 install -r requirements.txt`
 - Explore the codebase and familiarize yourself with the implementation of each cache eviction algorithm.
 - Run the provided benchmarking scripts to compare the algorithms' performance using predefined test cases or create your own custom scenarios.
 - Analyze the results and draw conclusions about the effectiveness of each algorithm in different situations.
