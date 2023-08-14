@@ -3,7 +3,6 @@ from models.types import Response, TweetLike
 from collections import OrderedDict
 import math
 
-
 class ARCAlgorithm:
     def __init__(self, capacity):
         self.c = capacity
@@ -47,8 +46,9 @@ class ARCAlgorithm:
                 self.b1.add(evicted_key)
             elif len(self.t1) + len(self.t2) == self.c:
                 evicted_key = self.__find_min(self.t2)
-                self.t2.pop(evicted_key)
-                self.b2.add(evicted_key)
+                if evicted_key != '':
+                    self.t2.pop(evicted_key)
+                    self.b2.add(evicted_key)
             self.t1.add(key)
             hit = False
 
@@ -64,8 +64,9 @@ class ARCAlgorithm:
             self.b1.add(old)
         else:
             evicted_key = self.__find_min(self.t2)
-            self.t2.pop(evicted_key)
-            self.b2.add(evicted_key)
+            if evicted_key != '':
+                self.t2.pop(evicted_key)
+                self.b2.add(evicted_key)
 
     def __find_min(self, dict: OrderedDict):
         min = math.inf
