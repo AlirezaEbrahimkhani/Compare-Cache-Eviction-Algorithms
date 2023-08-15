@@ -29,6 +29,20 @@ git clone https://github.com/AlirezaEbrahimkhani/Compare-Cache-Eviction-Algorith
 - Run the provided benchmarking scripts to compare the algorithms' performance using predefined test cases or create your own custom scenarios.
 - Analyze the results and draw conclusions about the effectiveness of each algorithm in different situations.
 
+## Results
+### Random numbers
+<br>
+<img src="assets/random-numbers.png">
+
+### Weighted random numbers
+<br>
+<img src="assets/wighted-random-numbers.png">
+
+### Real data
+<br>
+<img src="assets/real-data.png">
+
+
 ## Contributing
 
 Contributions to this project are welcome! If you have ideas for improving existing algorithms, implementing new ones, or enhancing the benchmarking process, feel free to submit a pull request. Please ensure that your code adheres to the project's coding conventions and includes appropriate tests.
