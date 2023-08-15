@@ -1,5 +1,4 @@
 import requests
-from time import sleep
 import json
 import random
 from utils.evictAlgo import EvictionAlgorithm
@@ -7,53 +6,60 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class Main:
-    
-    def __init__(self, test_cases) -> None:
-        self.test_cases = test_cases
-        self.randMin = 1
-        self.randMax = 100
+
+    def __init__(self):
+        self.real_test_case = [1, 2, 3, 4, 1, 1, 1, 3, 4, 6, 2, 1]  # main idea :D
+        self.test_nums = [1, 2, 3, 4, 1, 1, 1, 3, 4, 6, 2, 1, 3, 5, 5, 6, 3, 3, 3, 5, 6, 8, 4, 3, 5, 6, 7, 8, 5, 5, 5, 7, 8, 10, 6, 5, 8, 9, 9, 10, 7, 7, 7, 9, 10, 12, 8, 7]
 
     def getTweet(self, evictionAlgo: EvictionAlgorithm, id: int):
         url: str = 'http://localhost:8000/tweet/' + evictionAlgo.value
         r = requests.get(url, params={'id': id})
         return r.text
-    
-    def lruTest(self):
-        hit_count = 0
-        for i in range(0, self.test_cases):
-            rand_num = self.__genRandomNum(self.randMin, self.randMax)
-            resp = main.getTweet(EvictionAlgorithm.LRU, rand_num)
-            if json.loads(resp)['hit']:
-                hit_count = hit_count + 1
-        return hit_count
-    
-    def lfuTest(self):
-        hit_count = 0
-        for i in range(0, self.test_cases):
-            rand_num = self.__genRandomNum(self.randMin, self.randMax)
-            resp = main.getTweet(EvictionAlgorithm.LFU, rand_num)
-            if json.loads(resp)['hit']:
-                hit_count = hit_count + 1
-        return hit_count
-    
-    def arcTest(self):
-        hit_count = 0
-        for i in range(0, self.test_cases):
-            rand_num = self.__genRandomNum(self.randMin, self.randMax)
-            resp = main.getTweet(EvictionAlgorithm.ARC, rand_num)
-            if json.loads(resp)['hit']:
-                hit_count = hit_count + 1
-        return hit_count
-                    
+
+    def clearCache(self):
+        url: str = 'http://localhost:8000/tweet/clear'
+        r = requests.get(url)
+        return r.text
+
+    def generate_rand_test_case(self, count, min, max):
+        return [self.__genRandomNum(min, max) for _ in range(0, count)]
+
+    def generate_weighted_rand_test_case(self, count, min, max):
+        nums = []
+        weights = []
+        num = 0
+        for i in range(min, max):
+            nums.append(i)
+            num = num + self.__genRandomNum(0, 3)
+            weights.append(num)
+        return random.choices(nums, cum_weights=tuple(weights), k=count)
+
+    def test_algorithms(self, data):
+        lru_hit_count = 0
+        lfu_hit_count = 0
+        arc_hit_count = 0
+        for item in data:
+            lru_resp = main.getTweet(EvictionAlgorithm.LRU, item)
+            if json.loads(lru_resp)['hit']:
+                lru_hit_count = lru_hit_count + 1
+        self.clearCache()
+        for item in data:
+            lfu_resp = main.getTweet(EvictionAlgorithm.LFU, item)
+            if json.loads(lfu_resp)['hit']:
+                lfu_hit_count = lfu_hit_count + 1
+        for item in data:
+            arc_resp = main.getTweet(EvictionAlgorithm.ARC, item)
+            if json.loads(arc_resp)['hit']:
+                arc_hit_count = arc_hit_count + 1
+
+        return [lru_hit_count, lfu_hit_count, arc_hit_count]
+
     def __genRandomNum(self, min, max):
         return random.randint(min, max)
-    
-    def plotHitMiss(self):
-        lru_hit = self.lruTest()
-        lfu_hit = self.lfuTest()
-        arc_hit = self.arcTest()
-        hits = [lru_hit, lfu_hit, arc_hit]
-        misses = [self.test_cases - lru_hit, self.test_cases - lfu_hit, self.test_cases - arc_hit]
+
+    def plotHitMiss(self, data):
+        hits = self.test_algorithms(data)
+        misses = [len(data) - hits[0], len(data) - hits[1], len(data) - hits[2]]
         species = ('LRU', 'LFU', 'ARC')
         columns = {
             'Hit': np.array(hits),
@@ -72,6 +78,10 @@ class Main:
         ax.legend()
         plt.show()
 
-main = Main(100)
 
-main.plotHitMiss()
+main = Main()
+
+rand_nums = main.generate_rand_test_case(1000, 1, 800)
+weighted_rand_nums = main.generate_weighted_rand_test_case(1000, 1, 800)
+
+main.plotHitMiss(rand_nums)

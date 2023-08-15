@@ -1,10 +1,12 @@
 from fastapi import FastAPI
+from utils.redis import Redis
 from algorithms.lfu import LFUAlgorithm
 from algorithms.lru import LRUAlgorithm
 from algorithms.arc import ARCAlgorithm
 
-cache_capacity: int = 4
+cache_capacity: int = 100
 
+redis = Redis()
 app = FastAPI()
 lfu = LFUAlgorithm(cache_capacity)
 lru = LRUAlgorithm(cache_capacity)
@@ -28,3 +30,7 @@ def getTest(id: int):
 def getTest(id: int):
     tweet = arc.get(id)
     return tweet
+
+@app.get("/tweet/clear")
+def getTest():
+    redis.clearDB()
