@@ -9,7 +9,7 @@ Currently, the following cache eviction algorithms have been implemented in this
 
 - LRU (Least Recently Used)
 - LFU (Least Frequently Used)
-- ARC (Adaptive replacement cache)
+- ARC (Adaptive Replacement Cache)
 
 // TODO: Algorithms explanation
 
